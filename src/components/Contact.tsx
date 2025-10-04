@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
-import { Mail, MapPin, Send } from "lucide-react";
+import { Mail, Linkedin, Github, Send } from "lucide-react";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -22,13 +22,32 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const contactInfo = [
+    {
+      icon: <Mail className="h-6 w-6 text-primary" />,
+      label: "Email",
+      value: "your.email@example.com",
+      link: "mailto:your.email@example.com"
+    },
+    {
+      icon: <Linkedin className="h-6 w-6 text-primary" />,
+      label: "LinkedIn",
+      value: "your-linkedin-profile",
+      link: "https://linkedin.com/in/your-profile"
+    },
+    {
+      icon: <Github className="h-6 w-6 text-primary" />,
+      label: "GitHub",
+      value: "Coming Soon",
+      link: "#"
+    }
+  ];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     try {
-      // Validate form data
       const validatedData = contactSchema.parse(formData);
-      
       setIsSubmitting(true);
       
       // Simulate API call
@@ -39,7 +58,6 @@ const Contact = () => {
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
       
-      // Reset form
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -68,59 +86,64 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-32 bg-gradient-subtle">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-20 lg:py-32 bg-background relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-bg opacity-30" />
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Get In Touch
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Have a project in mind or want to collaborate? I'd love to hear from you.
-          </p>
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+            <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
+              Contact
+            </h2>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Contact Info */}
-          <div className="lg:col-span-1 space-y-6">
-            <Card className="bg-gradient-card shadow-card border-border/50 animate-scale-in">
-              <CardContent className="pt-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <Mail className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-card-foreground mb-1">Email</h3>
-                    <p className="text-sm text-muted-foreground">your.email@example.com</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-card shadow-card border-border/50 animate-scale-in" style={{ animationDelay: "100ms" }}>
-              <CardContent className="pt-6">
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <MapPin className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-card-foreground mb-1">Location</h3>
-                    <p className="text-sm text-muted-foreground">San Francisco, CA</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="lg:col-span-1 space-y-4">
+            <h3 className="text-2xl font-semibold text-foreground mb-6">
+              Contact Information
+            </h3>
+            
+            {contactInfo.map((info, index) => (
+              <Card 
+                key={index}
+                className="bg-gradient-card shadow-card border-border/50 hover:shadow-glow transition-all duration-300 animate-scale-in"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <CardContent className="pt-6">
+                  <a 
+                    href={info.link}
+                    target={info.link.startsWith('http') ? '_blank' : undefined}
+                    rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="flex items-center gap-4 group"
+                  >
+                    <div className="p-3 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-colors">
+                      {info.icon}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-card-foreground mb-1">{info.label}</h4>
+                      <p className="text-sm text-primary">{info.value}</p>
+                    </div>
+                  </a>
+                </CardContent>
+              </Card>
+            ))}
           </div>
 
           {/* Contact Form */}
-          <Card className="lg:col-span-2 bg-gradient-card shadow-card border-border/50 animate-scale-in" style={{ animationDelay: "200ms" }}>
+          <Card className="lg:col-span-2 bg-gradient-card shadow-card border-border/50 animate-scale-in" style={{ animationDelay: "300ms" }}>
             <CardHeader>
-              <CardTitle>Send a Message</CardTitle>
-              <CardDescription>Fill out the form below and I'll get back to you as soon as possible</CardDescription>
+              <CardTitle className="text-2xl text-foreground">Send a Message</CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Fill out the form below and I'll get back to you as soon as possible
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="name" className="text-foreground">Name</Label>
                   <Input
                     id="name"
                     name="name"
@@ -129,12 +152,12 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     maxLength={100}
-                    className="bg-background/50 border-border focus:border-primary transition-colors"
+                    className="bg-input border-border focus:border-primary transition-colors text-foreground"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email" className="text-foreground">Email</Label>
                   <Input
                     id="email"
                     name="email"
@@ -144,12 +167,12 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     maxLength={255}
-                    className="bg-background/50 border-border focus:border-primary transition-colors"
+                    className="bg-input border-border focus:border-primary transition-colors text-foreground"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
+                  <Label htmlFor="message" className="text-foreground">Message</Label>
                   <Textarea
                     id="message"
                     name="message"
@@ -159,14 +182,14 @@ const Contact = () => {
                     required
                     minLength={10}
                     maxLength={1000}
-                    rows={5}
-                    className="bg-background/50 border-border focus:border-primary transition-colors resize-none"
+                    rows={6}
+                    className="bg-input border-border focus:border-primary transition-colors resize-none text-foreground"
                   />
                 </div>
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-primary hover:bg-primary/90 shadow-elegant"
+                  className="w-full bg-gradient-button hover:opacity-90 shadow-glow text-white border-0"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (

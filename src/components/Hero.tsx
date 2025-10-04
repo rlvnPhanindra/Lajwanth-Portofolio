@@ -1,96 +1,81 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import { Download, Mail, ChevronDown, Code } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleDownloadResume = () => {
+    toast({
+      title: "Resume Download",
+      description: "Please upload your resume PDF to enable downloads",
+    });
+  };
+
   return (
     <section 
       id="home" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        backgroundImage: `linear-gradient(135deg, rgba(109, 40, 217, 0.9) 0%, rgba(147, 51, 234, 0.8) 100%), url(${heroBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundBlendMode: 'overlay'
-      }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
-      {/* Animated gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-hero opacity-80 animate-gradient-shift" style={{ backgroundSize: '200% 200%' }} />
+      {/* Animated background */}
+      <div className="absolute inset-0 bg-gradient-bg opacity-50" />
+      
+      {/* Decorative code symbols */}
+      <div className="absolute inset-0 overflow-hidden opacity-10">
+        <div className="absolute top-20 left-10 text-6xl text-primary font-mono">&lt;/&gt;</div>
+        <div className="absolute bottom-40 right-20 text-4xl text-accent font-mono">{ }</div>
+        <div className="absolute top-1/2 left-1/4 text-5xl text-primary font-mono">[ ]</div>
+      </div>
+
+      {/* Code icon in circle */}
+      <div className="absolute top-32 left-1/2 -translate-x-1/2 animate-fade-in">
+        <div className="w-24 h-24 rounded-full border-2 border-primary flex items-center justify-center backdrop-blur-sm bg-card/30">
+          <Code className="h-10 w-10 text-primary" />
+        </div>
+      </div>
       
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
         <div className="animate-fade-in-up">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-primary-foreground mb-6 leading-tight">
-            Full Stack Developer
-            <span className="block text-4xl sm:text-5xl lg:text-6xl mt-2 bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
-              Building Digital Experiences
-            </span>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-4 leading-tight tracking-wider">
+            RAVURI LAJWANTH V N P
           </h1>
           
-          <p className="text-lg sm:text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto font-light">
-            Crafting scalable web applications with modern technologies. 
-            Passionate about clean code, user experience, and innovative solutions.
+          <p className="text-2xl sm:text-3xl text-primary mb-6 font-light tracking-wide">
+            Tech Enthusiast
           </p>
 
-          <div className="flex flex-wrap gap-4 justify-center mb-12">
+          <p className="text-lg sm:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+            Full Stack Developer & Tech Innovator | Passionate About Building the Future of Tech
+          </p>
+
+          <div className="flex flex-wrap gap-4 justify-center">
             <Button 
               size="lg" 
-              onClick={() => scrollToSection('projects')}
-              className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-glow group"
+              onClick={handleDownloadResume}
+              className="bg-gradient-button hover:opacity-90 shadow-glow text-white border-0 px-8 group"
             >
-              View My Work
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+              Download Resume
             </Button>
             <Button 
               size="lg" 
               variant="outline"
               onClick={() => scrollToSection('contact')}
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 backdrop-blur-sm"
+              className="border-primary/50 text-foreground hover:bg-primary/10 backdrop-blur-sm px-8"
             >
+              <Mail className="mr-2 h-5 w-5" />
               Get In Touch
             </Button>
-          </div>
-
-          {/* Social Links */}
-          <div className="flex gap-6 justify-center">
-            <a 
-              href="https://github.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-primary-foreground/80 hover:text-primary-foreground hover:scale-110 transition-all"
-              aria-label="GitHub"
-            >
-              <Github className="h-6 w-6" />
-            </a>
-            <a 
-              href="https://linkedin.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-primary-foreground/80 hover:text-primary-foreground hover:scale-110 transition-all"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="h-6 w-6" />
-            </a>
-            <a 
-              href="mailto:your.email@example.com"
-              className="text-primary-foreground/80 hover:text-primary-foreground hover:scale-110 transition-all"
-              aria-label="Email"
-            >
-              <Mail className="h-6 w-6" />
-            </a>
           </div>
         </div>
       </div>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-primary-foreground/30 rounded-full flex justify-center pt-2">
-          <div className="w-1 h-2 bg-primary-foreground/60 rounded-full" />
-        </div>
+        <ChevronDown className="h-8 w-8 text-primary" />
       </div>
     </section>
   );

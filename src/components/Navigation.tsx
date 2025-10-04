@@ -21,9 +21,11 @@ const Navigation = () => {
   };
 
   const navLinks = [
-    { label: "Home", id: "home" },
     { label: "About", id: "about" },
+    { label: "Skills", id: "about" },
     { label: "Projects", id: "projects" },
+    { label: "Achievements", id: "achievements" },
+    { label: "Education", id: "education" },
     { label: "Contact", id: "contact" },
   ];
 
@@ -31,8 +33,8 @@ const Navigation = () => {
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? "bg-background/95 backdrop-blur-md shadow-card" 
-          : "bg-transparent"
+          ? "bg-background/95 backdrop-blur-md shadow-card border-b border-border/50" 
+          : "bg-background/60 backdrop-blur-sm"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -40,9 +42,9 @@ const Navigation = () => {
           {/* Logo */}
           <button 
             onClick={() => scrollToSection("home")}
-            className="text-xl font-bold text-foreground hover:text-primary transition-colors"
+            className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hover:opacity-80 transition-opacity"
           >
-            Portfolio
+            Ravuri Lajwanth V N P
           </button>
 
           {/* Desktop Navigation */}
