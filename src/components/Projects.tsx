@@ -9,27 +9,27 @@ import project3 from "@/assets/project-3.jpg";
 const Projects = () => {
   const projects = [
     {
-      title: "Task Management Dashboard",
-      description: "A comprehensive project management platform with real-time collaboration, task tracking, and team analytics. Built with modern best practices for scalability.",
-      image: project1,
-      tech: ["React", "Node.js", "PostgreSQL", "WebSocket"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com"
-    },
-    {
-      title: "E-Commerce Platform",
-      description: "Full-featured online marketplace with payment integration, inventory management, and advanced search. Optimized for performance and conversion.",
+      title: "E-Commerce Website for Online Shopping",
+      description: "Full-stack e-commerce web application for electronic items with product listings, secure user authentication, shopping cart, order management, and digital invoice generation.",
       image: project2,
-      tech: ["Next.js", "Stripe", "MongoDB", "Tailwind"],
-      liveUrl: "https://example.com",
+      tech: ["JSP", "HTML", "CSS", "JavaScript", "MySQL"],
+      liveUrl: "#",
       githubUrl: "https://github.com"
     },
     {
-      title: "Social Media App",
-      description: "Mobile-first social networking application with real-time messaging, media sharing, and AI-powered content recommendations.",
+      title: "AI-Powered Autonomous Web Task Automation",
+      description: "AI agent that executes multi-step web workflows from natural language prompts — navigating browsers, composing emails, and automating tasks across web platforms.",
+      image: project1,
+      tech: ["AI Agents", "Playwright", "NLP", "Gemini API"],
+      liveUrl: "#",
+      githubUrl: "https://github.com"
+    },
+    {
+      title: "IoT Embedded Systems Project",
+      description: "Hands-on embedded systems & software development project completed during IoT internship at Shikara Embedded Solutions Pvt. Ltd.",
       image: project3,
-      tech: ["React Native", "Firebase", "Express", "Redis"],
-      liveUrl: "https://example.com",
+      tech: ["Embedded C", "IoT", "Microcontrollers", "Sensors"],
+      liveUrl: "#",
       githubUrl: "https://github.com"
     }
   ];
