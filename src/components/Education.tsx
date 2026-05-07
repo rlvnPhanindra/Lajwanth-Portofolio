@@ -5,19 +5,27 @@ const Education = () => {
   const education = [
     {
       degree: "Bachelor of Technology",
-      field: "Computer Science & Engineering",
-      institution: "Your University Name",
-      location: "City, State",
-      period: "2020 - 2024",
-      grade: "CGPA: 8.5/10",
+      field: "Information Technology",
+      institution: "Lakireddy Bali Reddy College of Engineering (Autonomous)",
+      location: "Mylavaram, Andhra Pradesh",
+      period: "Aug 2023 – Aug 2027",
+      grade: "Pursuing",
     },
     {
-      degree: "Higher Secondary Education",
-      field: "Science Stream",
-      institution: "Your School Name",
-      location: "City, State",
-      period: "2018 - 2020",
-      grade: "Percentage: 85%",
+      degree: "Intermediate (MPC)",
+      field: "Mathematics, Physics, Chemistry",
+      institution: "Oxford Junior College",
+      location: "Narasaraopet, Andhra Pradesh",
+      period: "2021 – 2023",
+      grade: "Completed",
+    },
+    {
+      degree: "Secondary School Certificate (SSC)",
+      field: "Schooling",
+      institution: "Oxford Concept School",
+      location: "Narasaraopet, Andhra Pradesh",
+      period: "2021",
+      grade: "Completed",
     },
   ];
 
