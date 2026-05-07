@@ -5,46 +5,67 @@ import { Code, Award, Lightbulb, Users, Trophy, BookOpen } from "lucide-react";
 const Achievements = () => {
   const achievements = [
     {
-      icon: <Code className="h-8 w-8 text-primary" />,
-      title: "Advanced Programming",
-      organization: "Your Institution",
-      year: "2024",
+      icon: <Trophy className="h-8 w-8 text-primary" />,
+      title: "Best Performer – LINGUASPARK 2K25",
+      organization: "College Event",
+      year: "2025",
       color: "from-purple-500 to-blue-500"
     },
     {
       icon: <Award className="h-8 w-8 text-primary" />,
-      title: "Web Development Certification",
-      organization: "Online Platform",
+      title: "Third Prize – JNANA MANTHANA 2K25 (SAMVADA)",
+      organization: "College Event",
+      year: "2025",
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: <Award className="h-8 w-8 text-primary" />,
+      title: "OCI 2025 Generative AI Professional",
+      organization: "Oracle",
+      year: "2025",
+      color: "from-purple-500 to-pink-500"
+    },
+    {
+      icon: <Award className="h-8 w-8 text-primary" />,
+      title: "AWS Cloud Practitioner",
+      organization: "Amazon Web Services",
+      year: "2025",
+      color: "from-blue-500 to-purple-500"
+    },
+    {
+      icon: <Code className="h-8 w-8 text-primary" />,
+      title: "Complete Full-Stack Web Bootcamp",
+      organization: "Udemy",
+      year: "2024",
+      color: "from-cyan-500 to-blue-500"
+    },
+    {
+      icon: <Lightbulb className="h-8 w-8 text-primary" />,
+      title: "Advanced Prompt Engineering with ChatGPT",
+      organization: "AI Certification",
+      year: "2024",
+      color: "from-purple-500 to-blue-500"
+    },
+    {
+      icon: <BookOpen className="h-8 w-8 text-primary" />,
+      title: "Python, OS & Networking Basics",
+      organization: "Cisco Networking Academy",
       year: "2024",
       color: "from-blue-500 to-cyan-500"
     },
     {
-      icon: <Lightbulb className="h-8 w-8 text-primary" />,
-      title: "Problem Solving Excellence",
-      organization: "Coding Platform",
-      year: "2023",
+      icon: <Award className="h-8 w-8 text-primary" />,
+      title: "SQL (Basic)",
+      organization: "HackerRank",
+      year: "2024",
       color: "from-purple-500 to-pink-500"
     },
     {
       icon: <Users className="h-8 w-8 text-primary" />,
-      title: "Team Leadership Skills",
-      organization: "Workshop",
-      year: "2024",
-      color: "from-blue-500 to-purple-500"
-    },
-    {
-      icon: <Trophy className="h-8 w-8 text-primary" />,
-      title: "Hackathon Participant",
-      organization: "Tech Event",
-      year: "2023",
-      color: "from-cyan-500 to-blue-500"
-    },
-    {
-      icon: <BookOpen className="h-8 w-8 text-primary" />,
-      title: "Data Structures Course",
-      organization: "Online Learning",
-      year: "2024",
-      color: "from-purple-500 to-blue-500"
+      title: "Claude 101, Claude Code & AI Fluency",
+      organization: "Anthropic",
+      year: "2025",
+      color: "from-cyan-500 to-purple-500"
     }
   ];
 
