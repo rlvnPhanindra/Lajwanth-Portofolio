@@ -1,17 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Download, Mail, ChevronDown, Code } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleDownloadResume = () => {
-    toast({
-      title: "Resume Download",
-      description: "Please upload your resume PDF to enable downloads",
-    });
   };
 
   return (
