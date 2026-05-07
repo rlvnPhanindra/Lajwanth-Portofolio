@@ -44,13 +44,15 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button 
+          <Button 
               size="lg" 
-              onClick={handleDownloadResume}
+              asChild
               className="bg-gradient-button hover:opacity-90 shadow-glow text-white border-0 px-8 group"
             >
-              <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-              Download Resume
+              <a href="/resume.pdf" download="Ravuri_Lajwanth_Resume.pdf">
+                <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+                Download Resume
+              </a>
             </Button>
             <Button 
               size="lg" 
