@@ -4,31 +4,32 @@ import { Code2, Database, Globe, Smartphone } from "lucide-react";
 
 const About = () => {
   const skills = [
-    "React", "TypeScript", "Node.js", "Python", "PostgreSQL", 
-    "MongoDB", "Tailwind CSS", "REST APIs", "Git", "Docker",
-    "AWS", "GraphQL", "Next.js", "Express", "Redux"
+    "Java", "Python", "C", "Flutter", "HTML", "CSS",
+    "JavaScript", "React", "Node.js", "REST APIs",
+    "MySQL", "MongoDB", "SQL", "DBMS",
+    "Data Structures", "Algorithms", "OOP", "Git", "Agile"
   ];
 
   const features = [
     {
       icon: <Code2 className="h-8 w-8 text-primary" />,
-      title: "Clean Code",
-      description: "Writing maintainable, scalable code following industry best practices"
-    },
-    {
-      icon: <Globe className="h-8 w-8 text-primary" />,
-      title: "Full Stack",
-      description: "End-to-end development from database design to polished UI/UX"
+      title: "Programming",
+      description: "Strong foundation in Java, Python and C with focus on DSA & OOP"
     },
     {
       icon: <Smartphone className="h-8 w-8 text-primary" />,
-      title: "Responsive Design",
-      description: "Mobile-first approach ensuring seamless experience across all devices"
+      title: "Frontend & Mobile",
+      description: "Building responsive UIs with Flutter, HTML, CSS, JavaScript and React"
+    },
+    {
+      icon: <Globe className="h-8 w-8 text-primary" />,
+      title: "Backend",
+      description: "Server-side programming with Node.js and RESTful API design"
     },
     {
       icon: <Database className="h-8 w-8 text-primary" />,
-      title: "Backend Expert",
-      description: "Building robust APIs and database architectures for performance"
+      title: "Databases",
+      description: "Experience with MySQL, MongoDB, SQL and DBMS concepts"
     }
   ];
 
@@ -40,10 +41,11 @@ const About = () => {
             About Me
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            I'm a passionate full stack developer with a focus on creating innovative web solutions. 
-            With expertise spanning modern frontend frameworks to robust backend systems, I bring ideas 
-            to life through code. My approach combines technical excellence with thoughtful design to 
-            deliver exceptional user experiences.
+            Aspiring Full Stack Developer with strong technical expertise in Java, C, and Python.
+            Experienced in frontend development using Flutter and database management systems.
+            Passionate about building innovative web and mobile applications with a solid foundation
+            in Data Structures and Algorithms — seeking opportunities to contribute to impactful
+            software development projects in IT Services & Consulting.
           </p>
         </div>
 

@@ -26,20 +26,20 @@ const Contact = () => {
     {
       icon: <Mail className="h-6 w-6 text-primary" />,
       label: "Email",
-      value: "your.email@example.com",
-      link: "mailto:your.email@example.com"
+      value: "crazykrishna139@gmail.com",
+      link: "mailto:crazykrishna139@gmail.com"
     },
     {
       icon: <Linkedin className="h-6 w-6 text-primary" />,
       label: "LinkedIn",
-      value: "your-linkedin-profile",
-      link: "https://linkedin.com/in/your-profile"
+      value: "Lajwanth V N P Ravuri",
+      link: "https://www.linkedin.com/in/lajwanth-v-n-p-ravuri"
     },
     {
       icon: <Github className="h-6 w-6 text-primary" />,
-      label: "GitHub",
-      value: "Coming Soon",
-      link: "#"
+      label: "Phone",
+      value: "+91 93927 50400",
+      link: "tel:+919392750400"
     }
   ];
 

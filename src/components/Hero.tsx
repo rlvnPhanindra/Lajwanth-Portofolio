@@ -1,17 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Download, Mail, ChevronDown, Code } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleDownloadResume = () => {
-    toast({
-      title: "Resume Download",
-      description: "Please upload your resume PDF to enable downloads",
-    });
   };
 
   return (
@@ -44,21 +36,23 @@ const Hero = () => {
           </h1>
           
           <p className="text-2xl sm:text-3xl text-primary mb-6 font-light tracking-wide">
-            Tech Enthusiast
+            Aspiring Full Stack Developer
           </p>
 
           <p className="text-lg sm:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-            Full Stack Developer & Tech Innovator | Passionate About Building the Future of Tech
+            Java • Python • Flutter • React | Building innovative web & mobile applications with a strong foundation in DSA
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button 
+          <Button 
               size="lg" 
-              onClick={handleDownloadResume}
+              asChild
               className="bg-gradient-button hover:opacity-90 shadow-glow text-white border-0 px-8 group"
             >
-              <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-              Download Resume
+              <a href="/resume.pdf" download="Ravuri_Lajwanth_Resume.pdf">
+                <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+                Download Resume
+              </a>
             </Button>
             <Button 
               size="lg" 
