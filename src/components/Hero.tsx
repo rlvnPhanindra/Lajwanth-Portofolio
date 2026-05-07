@@ -36,11 +36,11 @@ const Hero = () => {
           </h1>
           
           <p className="text-2xl sm:text-3xl text-primary mb-6 font-light tracking-wide">
-            Tech Enthusiast
+            Aspiring Full Stack Developer
           </p>
 
           <p className="text-lg sm:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-            Full Stack Developer & Tech Innovator | Passionate About Building the Future of Tech
+            Java • Python • Flutter • React | Building innovative web & mobile applications with a strong foundation in DSA
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
