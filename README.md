@@ -1,73 +1,125 @@
-# Welcome to your Lovable project
+# 🚀 Ravuri Lajwanth V N P — Personal Portfolio
 
-## Project info
+A premium, dark-themed personal portfolio website built with modern web technologies. Featuring glassmorphism UI panels, animated particle fields, scroll-reveal effects, and a fully responsive design.
 
-**URL**: https://lovable.dev/projects/de957067-2127-4711-9def-984dbbcabb9f
+🌐 **Live Site**: [rlvnphanindra.github.io/Personal-Portofolio](https://rlvnphanindra.github.io/Personal-Portofolio/)
 
-## How can I edit this code?
+![Portfolio Preview](https://img.shields.io/badge/Status-Live-brightgreen?style=for-the-badge)
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## ✨ Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/de957067-2127-4711-9def-984dbbcabb9f) and start prompting.
+- **🎨 Dark Theme Design** — Deep space navy (`#050814`) with electric purple, cyan, and rose accents
+- **🪟 Glassmorphism UI** — Frosted glass panels with `backdrop-filter: blur(24px)` and glow borders
+- **🌌 Particle Field** — Interactive 2,000-point animated background with mouse parallax
+- **⌨️ Typewriter Effect** — Dynamic role titles that type and erase in the hero section
+- **📜 Scroll Animations** — Staggered reveal effects powered by IntersectionObserver
+- **🖼️ Digital Avatar** — AI-generated cyberpunk portrait with gradient glow border
+- **📄 Resume Download** — One-click PDF download with proper headers
+- **📬 Contact Form** — Fully functional via EmailJS with confetti on success
+- **💬 WhatsApp Integration** — Quick-contact floating button
+- **📱 Fully Responsive** — Optimized for desktop, tablet, and mobile
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🛠️ Tech Stack
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+| Category       | Technologies                                                     |
+|----------------|------------------------------------------------------------------|
+| **Framework**  | React 18 + Vite 5                                                |
+| **Language**   | TypeScript 5                                                     |
+| **Styling**    | Tailwind CSS 3, Custom CSS animations, Glassmorphism             |
+| **UI Library** | shadcn/ui, Radix UI primitives, Lucide React icons               |
+| **Forms**      | React Hook Form + Zod validation                                 |
+| **Email**      | EmailJS (backend-less contact form)                               |
+| **Fonts**      | Space Grotesk (display), Inter (body), JetBrains Mono (code)     |
+| **Deployment** | GitHub Pages via GitHub Actions CI/CD                            |
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## 📁 Project Structure
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+```
+src/
+├── assets/            # Avatar and static assets
+├── components/
+│   ├── ui/            # shadcn/ui base components
+│   ├── Navigation.tsx # Floating glass pill navbar
+│   ├── Hero.tsx       # Particle field + typewriter hero
+│   ├── About.tsx      # Bio card with digital avatar
+│   ├── Projects.tsx   # Interactive project cards
+│   ├── Achievements.tsx # Color-coded achievement grid
+│   ├── Education.tsx  # Vertical timeline
+│   ├── Contact.tsx    # EmailJS form with confetti
+│   ├── Footer.tsx     # Wave divider + social links
+│   └── LoadingScreen.tsx # Animated loading screen
+├── hooks/
+│   ├── useTypewriter.ts   # Typewriter animation hook
+│   └── useScrollReveal.ts # IntersectionObserver hook
+├── pages/
+│   └── Index.tsx      # Main page assembling all sections
+├── App.tsx            # Router + providers
+└── index.css          # Global styles + design tokens
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🚀 Getting Started
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v18+ & npm
+
+### Local Development
+
+```bash
+# Clone the repository
+git clone https://github.com/rlvnPhanindra/Personal-Portofolio.git
+
+# Navigate to the project
+cd Personal-Portofolio
+
+# Install dependencies
+npm install
+
+# Start the dev server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The site will be available at `http://localhost:8080`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Production Build
 
-**Use GitHub Codespaces**
+```bash
+npm run build
+npm run preview
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## 🌍 Deployment
 
-This project is built with:
+This project auto-deploys to **GitHub Pages** via a GitHub Actions workflow on every push to `main`.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The CI/CD pipeline:
+1. Installs dependencies (`npm ci`)
+2. Builds the production bundle (`npm run build`)
+3. Deploys the `dist/` folder to GitHub Pages
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/de957067-2127-4711-9def-984dbbcabb9f) and click on Share -> Publish.
+## 📫 Contact
 
-## Can I connect a custom domain to my Lovable project?
+- **Email**: [rlvnphanindra@gmail.com](mailto:rlvnphanindra@gmail.com)
+- **GitHub**: [@rlvnPhanindra](https://github.com/rlvnPhanindra)
+- **LinkedIn**: [Ravuri Lajwanth V N P](https://www.linkedin.com/in/ravuri-lajwanth-v-n-p-064872289/)
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+<p align="center">
+  Built with ❤️ by <strong>Ravuri Lajwanth V N P</strong>
+</p>
