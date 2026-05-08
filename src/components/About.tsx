@@ -1,89 +1,182 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Code2, Database, Globe, Smartphone } from "lucide-react";
+import { Code2, Database, Globe, Smartphone, Download, Briefcase, MapPin } from "lucide-react";
+import useScrollReveal from "@/hooks/useScrollReveal";
+import avatarImage from "@/assets/avatar.png";
 
 const About = () => {
-  const skills = [
+  const { ref: sectionRef, isVisible } = useScrollReveal(0.1);
+
+  const technicalSkills = [
     "Java", "Python", "C", "Flutter", "HTML", "CSS",
-    "JavaScript", "React", "Node.js", "REST APIs",
+    "JavaScript", "React", "Node.js", "RESTful APIs",
     "MySQL", "MongoDB", "SQL", "DBMS",
-    "Data Structures", "Algorithms", "OOP", "Git", "Agile"
+    "Data Structures", "Algorithms", "OOP", "Git",
+    "API Integration", "Agile Methodologies", "Software Engineering"
+  ];
+
+  const softSkills = [
+    "Team Collaboration", "Leadership", "Problem Solving", "Communication"
   ];
 
   const features = [
     {
-      icon: <Code2 className="h-8 w-8 text-primary" />,
+      icon: <Code2 className="h-7 w-7" />,
       title: "Programming",
-      description: "Strong foundation in Java, Python and C with focus on DSA & OOP"
+      description: "Strong foundation in Java, Python and C with focus on DSA & OOP",
+      gradient: "from-electric-purple to-cyan-accent",
     },
     {
-      icon: <Smartphone className="h-8 w-8 text-primary" />,
+      icon: <Smartphone className="h-7 w-7" />,
       title: "Frontend & Mobile",
-      description: "Building responsive UIs with Flutter, HTML, CSS, JavaScript and React"
+      description: "Building responsive UIs with Flutter, HTML, CSS, JavaScript and React",
+      gradient: "from-cyan-accent to-electric-purple",
     },
     {
-      icon: <Globe className="h-8 w-8 text-primary" />,
+      icon: <Globe className="h-7 w-7" />,
       title: "Backend",
-      description: "Server-side programming with Node.js and RESTful API design"
+      description: "Server-side programming with Node.js and RESTful API design",
+      gradient: "from-rose-accent to-electric-purple",
     },
     {
-      icon: <Database className="h-8 w-8 text-primary" />,
+      icon: <Database className="h-7 w-7" />,
       title: "Databases",
-      description: "Experience with MySQL, MongoDB, SQL and DBMS concepts"
-    }
+      description: "Experience with MySQL, MongoDB, SQL and DBMS concepts",
+      gradient: "from-electric-purple to-rose-accent",
+    },
   ];
 
   return (
-    <section id="about" className="py-20 lg:py-32 bg-gradient-subtle">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            About Me
+    <section id="about" className="section-padding relative overflow-hidden" style={{ background: "#050814" }}>
+      {/* Subtle gradient bg */}
+      <div className="absolute inset-0 bg-gradient-bg opacity-50" />
+
+      <div ref={sectionRef} className="container mx-auto px-6 lg:px-8 relative z-10">
+        {/* Section header */}
+        <div className={`max-w-3xl mx-auto text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="font-mono text-xs text-electric-purple tracking-[0.3em] uppercase mb-4 block">
+            // ABOUT ME
+          </span>
+          <h2 className="font-display text-4xl lg:text-5xl font-bold mb-6">
+            <span className="gradient-text">Who I Am</span>
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
+          <p className="text-lg text-foreground/60 leading-relaxed max-w-2xl mx-auto">
             Aspiring Full Stack Developer with strong technical expertise in Java, C, and Python.
             Experienced in frontend development using Flutter and database management systems.
             Passionate about building innovative web and mobile applications with a solid foundation
-            in Data Structures and Algorithms — seeking opportunities to contribute to impactful
-            software development projects in IT Services & Consulting.
+            in Data Structures and Algorithms.
           </p>
         </div>
 
+        {/* Bio glass card with digital avatar */}
+        <div className={`glass rounded-2xl p-8 lg:p-10 mb-16 max-w-5xl mx-auto transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="flex flex-col lg:flex-row items-center gap-10">
+            {/* Digital Avatar */}
+            <div className="relative flex-shrink-0 group">
+              {/* Glow ring behind avatar */}
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-electric-purple via-cyan-accent to-electric-purple opacity-40 blur-md group-hover:opacity-60 transition-opacity duration-500" />
+              <div className="relative w-52 h-64 lg:w-60 lg:h-72 rounded-2xl overflow-hidden border border-white/15 shadow-elevated">
+                <img
+                  src={avatarImage}
+                  alt="Ravuri Lajwanth V N P — Digital Avatar"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                />
+                {/* Subtle overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050814]/60 via-transparent to-transparent" />
+              </div>
+              {/* Bottom badges */}
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                <span className="glass rounded-full px-3 py-1 text-[10px] font-mono text-electric-purple border border-electric-purple/30 flex items-center gap-1.5">
+                  <Briefcase className="h-3 w-3" /> FULL STACK DEV
+                </span>
+                <span className="glass rounded-full px-3 py-1 text-[10px] font-mono text-cyan-accent border border-cyan-accent/30 flex items-center gap-1.5">
+                  <MapPin className="h-3 w-3" /> INDIA
+                </span>
+              </div>
+            </div>
+
+            {/* Bio text */}
+            <div className="flex-1 text-center lg:text-left pt-4 lg:pt-0">
+              <h3 className="font-display text-3xl font-bold text-foreground mb-2">
+                Ravuri Lajwanth V N P
+              </h3>
+              <p className="text-cyan-accent font-medium mb-4 text-lg">
+                B.Tech IT — LBRCE (Autonomous), Mylavaram
+              </p>
+              <p className="text-foreground/50 text-sm leading-relaxed mb-6 max-w-lg">
+                Aspiring Full Stack Developer with strong technical expertise in Java, C, and Python.
+                Experienced in frontend & mobile development using Flutter, React, and Node.js.
+                Passionate about building innovative web and mobile applications with a solid
+                foundation in Data Structures, Algorithms, and AI-powered solutions.
+              </p>
+              <a
+                href="/resume.pdf"
+                download="Ravuri_Lajwanth_Resume.pdf"
+                className="btn-glow inline-flex items-center gap-2 px-7 py-3 rounded-xl text-white font-semibold text-sm"
+              >
+                <Download className="h-4 w-4" />
+                Download Résumé
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* Feature Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
           {features.map((feature, index) => (
-            <Card 
+            <div
               key={index}
-              className="p-6 bg-gradient-card shadow-card hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 border-border/50 animate-scale-in"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className={`glass glass-hover rounded-2xl p-6 group cursor-default transition-all duration-700 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: `${300 + index * 100}ms` }}
             >
-              <div className="mb-4">{feature.icon}</div>
-              <h3 className="text-lg font-semibold mb-2 text-card-foreground">
+              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform duration-300`}>
+                {feature.icon}
+              </div>
+              <h3 className="text-lg font-display font-semibold mb-2 text-foreground">
                 {feature.title}
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-foreground/50">
                 {feature.description}
               </p>
-            </Card>
+            </div>
           ))}
         </div>
 
         {/* Skills */}
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-2xl font-semibold text-center mb-8 text-foreground">
-            Technical Skills
-          </h3>
-          <div className="flex flex-wrap gap-3 justify-center">
-            {skills.map((skill, index) => (
-              <Badge 
-                key={index}
-                variant="secondary"
-                className="px-4 py-2 text-sm font-medium bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-300 cursor-default animate-fade-in"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                {skill}
-              </Badge>
-            ))}
+        <div className="max-w-4xl mx-auto space-y-10">
+          <div className={`transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <h3 className="font-display text-2xl font-semibold text-center mb-8">
+              <span className="gradient-text">Technical Skills</span>
+            </h3>
+            <div className="flex flex-wrap gap-3 justify-center">
+              {technicalSkills.map((skill, index) => (
+                <div
+                  key={index}
+                  className="glass rounded-full px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-electric-purple/10 hover:border-electric-purple/30 transition-all duration-300 cursor-default"
+                  style={{ animationDelay: `${index * 30}ms` }}
+                >
+                  {skill}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={`transition-all duration-700 delay-[800ms] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <h3 className="font-display text-2xl font-semibold text-center mb-8">
+              <span className="gradient-text-rose">Soft Skills</span>
+            </h3>
+            <div className="flex flex-wrap gap-3 justify-center">
+              {softSkills.map((skill, index) => (
+                <div
+                  key={index}
+                  className="glass rounded-full px-5 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-rose-accent/10 hover:border-rose-accent/30 transition-all duration-300 cursor-default"
+                >
+                  {skill}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

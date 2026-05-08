@@ -1,17 +1,30 @@
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 50);
+
+      // Detect active section
+      const sections = ["home", "about", "projects", "achievements", "education", "contact"];
+      for (const section of sections.reverse()) {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 200) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -22,7 +35,6 @@ const Navigation = () => {
 
   const navLinks = [
     { label: "About", id: "about" },
-    { label: "Skills", id: "about" },
     { label: "Projects", id: "projects" },
     { label: "Achievements", id: "achievements" },
     { label: "Education", id: "education" },
@@ -30,65 +42,90 @@ const Navigation = () => {
   ];
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? "bg-background/95 backdrop-blur-md shadow-card border-b border-border/50" 
-          : "bg-background/60 backdrop-blur-sm"
-      }`}
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <button 
-            onClick={() => scrollToSection("home")}
-            className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-          >
-            Ravuri Lajwanth V N P
-          </button>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+    <>
+      {/* Floating glass pill navbar */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled
+            ? "top-4 mx-auto max-w-4xl px-4"
+            : "top-0 mx-0 max-w-full px-0"
+        }`}
+      >
+        <div
+          className={`transition-all duration-500 ${
+            isScrolled
+              ? "glass rounded-2xl shadow-elevated mx-auto"
+              : "bg-transparent"
+          }`}
+        >
+          <div className="px-6 py-3">
+            <div className="flex items-center justify-between">
+              {/* Logo */}
               <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="text-foreground hover:text-primary transition-colors font-medium relative group"
+                onClick={() => scrollToSection("home")}
+                className="font-display text-lg font-bold gradient-text hover:opacity-80 transition-opacity"
               >
-                {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+                RLVNP
               </button>
-            ))}
+
+              {/* Desktop nav */}
+              <div className="hidden md:flex items-center gap-1">
+                {navLinks.map((link) => (
+                  <button
+                    key={link.id}
+                    onClick={() => scrollToSection(link.id)}
+                    className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
+                      activeSection === link.id
+                        ? "text-white"
+                        : "text-foreground/60 hover:text-foreground"
+                    }`}
+                  >
+                    {activeSection === link.id && (
+                      <div className="absolute inset-0 bg-electric-purple/20 rounded-xl border border-electric-purple/30" />
+                    )}
+                    <span className="relative z-10">{link.label}</span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Mobile toggle */}
+              <button
+                className="md:hidden p-2 rounded-xl glass"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="h-5 w-5 text-foreground" />
+                ) : (
+                  <Menu className="h-5 w-5 text-foreground" />
+                )}
+              </button>
+            </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden text-foreground"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
+          {/* Mobile menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden px-4 pb-4 border-t border-white/10">
+              <div className="pt-3 space-y-1">
+                {navLinks.map((link) => (
+                  <button
+                    key={link.id}
+                    onClick={() => scrollToSection(link.id)}
+                    className={`block w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                      activeSection === link.id
+                        ? "bg-electric-purple/20 text-white border border-electric-purple/30"
+                        : "text-foreground/60 hover:text-foreground hover:bg-white/5"
+                    }`}
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden py-4 bg-background/95 backdrop-blur-md border-t border-border animate-fade-in">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="block w-full text-left px-4 py-3 text-foreground hover:text-primary hover:bg-muted/50 transition-colors font-medium"
-              >
-                {link.label}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
 

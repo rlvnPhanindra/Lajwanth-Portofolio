@@ -1,12 +1,14 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { useState } from "react";
 import { ExternalLink, Github } from "lucide-react";
+import useScrollReveal from "@/hooks/useScrollReveal";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 
 const Projects = () => {
+  const { ref: sectionRef, isVisible } = useScrollReveal(0.1);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   const projects = [
     {
       title: "E-Commerce Website for Online Shopping",
@@ -14,7 +16,8 @@ const Projects = () => {
       image: project2,
       tech: ["JSP", "HTML", "CSS", "JavaScript", "MySQL"],
       liveUrl: "#",
-      githubUrl: "https://github.com"
+      githubUrl: "https://github.com/rlvnPhanindra",
+      color: "#6C63FF",
     },
     {
       title: "AI-Powered Autonomous Web Task Automation",
@@ -22,7 +25,8 @@ const Projects = () => {
       image: project1,
       tech: ["AI Agents", "Playwright", "NLP", "Gemini API"],
       liveUrl: "#",
-      githubUrl: "https://github.com"
+      githubUrl: "https://github.com/rlvnPhanindra",
+      color: "#00D4FF",
     },
     {
       title: "IoT Embedded Systems Project",
@@ -30,86 +34,111 @@ const Projects = () => {
       image: project3,
       tech: ["Embedded C", "IoT", "Microcontrollers", "Sensors"],
       liveUrl: "#",
-      githubUrl: "https://github.com"
-    }
+      githubUrl: "https://github.com/rlvnPhanindra",
+      color: "#FF6584",
+    },
   ];
 
   return (
-    <section id="projects" className="py-20 lg:py-32 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Featured Projects
+    <section id="projects" className="section-padding relative overflow-hidden" style={{ background: "#050814" }}>
+      <div className="absolute inset-0 bg-gradient-bg opacity-30" />
+
+      <div ref={sectionRef} className="container mx-auto px-6 lg:px-8 relative z-10">
+        {/* Section header */}
+        <div className={`max-w-3xl mx-auto text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="font-mono text-xs text-cyan-accent tracking-[0.3em] uppercase mb-4 block">
+            // FEATURED WORK
+          </span>
+          <h2 className="font-display text-4xl lg:text-5xl font-bold mb-6">
+            <span className="gradient-text">Featured Projects</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-foreground/50">
             A selection of projects showcasing my technical skills and problem-solving approach
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Project grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
-            <Card 
+            <div
               key={index}
-              className="overflow-hidden bg-gradient-card shadow-card hover:shadow-elegant transition-all duration-300 hover:-translate-y-2 border-border/50 group animate-scale-in"
-              style={{ animationDelay: `${index * 150}ms` }}
+              className={`group relative glass rounded-2xl overflow-hidden transition-all duration-700 hover:-translate-y-3 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{
+                transitionDelay: `${200 + index * 150}ms`,
+              }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className="relative overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-card/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-              
-              <CardHeader>
-                <CardTitle className="text-xl font-bold text-card-foreground">
-                  {project.title}
-                </CardTitle>
-                <CardDescription className="text-muted-foreground">
-                  {project.description}
-                </CardDescription>
-              </CardHeader>
+              {/* Glow effect on hover */}
+              <div
+                className="absolute -inset-0.5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"
+                style={{
+                  background: `linear-gradient(135deg, ${project.color}40, transparent)`,
+                }}
+              />
 
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech, techIndex) => (
-                    <Badge 
-                      key={techIndex}
-                      variant="outline"
-                      className="text-xs border-primary/30 text-primary"
+              <div className="relative glass rounded-2xl overflow-hidden">
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050814] via-[#050814]/50 to-transparent" />
+
+                  {/* Overlay buttons on hover */}
+                  <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="glass rounded-xl px-4 py-2 text-white text-sm font-medium flex items-center gap-2 hover:bg-white/10 transition-colors"
                     >
-                      {tech}
-                    </Badge>
-                  ))}
+                      <ExternalLink className="h-4 w-4" />
+                      Live Demo
+                    </a>
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="glass rounded-xl px-4 py-2 text-white text-sm font-medium flex items-center gap-2 hover:bg-white/10 transition-colors"
+                    >
+                      <Github className="h-4 w-4" />
+                      Code
+                    </a>
+                  </div>
                 </div>
-              </CardContent>
 
-              <CardFooter className="flex gap-3">
-                <Button 
-                  variant="default"
-                  size="sm"
-                  className="flex-1 bg-primary hover:bg-primary/90 shadow-elegant"
-                  asChild
-                >
-                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    Live Demo
-                  </a>
-                </Button>
-                <Button 
-                  variant="outline"
-                  size="sm"
-                  className="flex-1 border-primary/30 hover:bg-primary/10"
-                  asChild
-                >
-                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                    <Github className="mr-2 h-4 w-4" />
-                    Code
-                  </a>
-                </Button>
-              </CardFooter>
-            </Card>
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="font-display text-lg font-bold text-foreground mb-2 group-hover:text-white transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-foreground/50 mb-4 line-clamp-2">
+                    {project.description}
+                  </p>
+
+                  {/* Tech pills */}
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="font-mono text-xs px-3 py-1 rounded-full border transition-colors duration-300"
+                        style={{
+                          borderColor: `${project.color}30`,
+                          color: `${project.color}CC`,
+                        }}
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

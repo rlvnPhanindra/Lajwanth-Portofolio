@@ -1,7 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GraduationCap, Calendar } from "lucide-react";
+import { GraduationCap, Calendar, MapPin } from "lucide-react";
+import useScrollReveal from "@/hooks/useScrollReveal";
 
 const Education = () => {
+  const { ref: sectionRef, isVisible } = useScrollReveal(0.1);
+
   const education = [
     {
       degree: "Bachelor of Technology",
@@ -10,6 +12,7 @@ const Education = () => {
       location: "Mylavaram, Andhra Pradesh",
       period: "Aug 2023 – Aug 2027",
       grade: "Pursuing",
+      color: "#6C63FF",
     },
     {
       degree: "Intermediate (MPC)",
@@ -18,6 +21,7 @@ const Education = () => {
       location: "Narasaraopet, Andhra Pradesh",
       period: "2021 – 2023",
       grade: "Completed",
+      color: "#00D4FF",
     },
     {
       degree: "Secondary School Certificate (SSC)",
@@ -26,61 +30,97 @@ const Education = () => {
       location: "Narasaraopet, Andhra Pradesh",
       period: "2021",
       grade: "Completed",
+      color: "#FF6584",
     },
   ];
 
   return (
-    <section id="education" className="py-20 lg:py-32 bg-background relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-bg opacity-30 rotate-180" />
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
-              Education
-            </h2>
-          </div>
+    <section id="education" className="section-padding relative overflow-hidden" style={{ background: "#050814" }}>
+      <div className="absolute inset-0 bg-gradient-bg opacity-20" style={{ transform: "rotate(180deg)" }} />
+
+      <div ref={sectionRef} className="container mx-auto px-6 lg:px-8 relative z-10">
+        {/* Section header */}
+        <div className={`max-w-3xl mx-auto text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="font-mono text-xs text-electric-purple tracking-[0.3em] uppercase mb-4 block">
+            // LEARNING PATH
+          </span>
+          <h2 className="font-display text-4xl lg:text-5xl font-bold mb-6">
+            <span className="gradient-text">Education</span>
+          </h2>
         </div>
 
-        <div className="max-w-4xl mx-auto space-y-6">
-          {education.map((edu, index) => (
-            <Card 
-              key={index}
-              className="bg-gradient-card shadow-card hover:shadow-glow transition-all duration-300 hover:-translate-y-1 border-border/50 animate-scale-in"
-              style={{ animationDelay: `${index * 150}ms` }}
-            >
-              <CardHeader className="flex flex-row items-start gap-4">
-                <div className="p-3 bg-primary/10 rounded-full">
-                  <GraduationCap className="h-8 w-8 text-primary" />
-                </div>
-                <div className="flex-1">
-                  <CardTitle className="text-2xl font-bold text-card-foreground mb-2">
-                    {edu.degree}
-                  </CardTitle>
-                  <p className="text-lg text-primary font-medium mb-1">
-                    {edu.field}
-                  </p>
-                  <p className="text-muted-foreground">
-                    {edu.institution}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    {edu.location}
-                  </p>
-                </div>
-              </CardHeader>
+        {/* Timeline */}
+        <div className="max-w-3xl mx-auto relative">
+          {/* Vertical line */}
+          <div
+            className={`absolute left-6 lg:left-1/2 top-0 bottom-0 w-px transition-all duration-1000 ${
+              isVisible ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{
+              background: 'linear-gradient(to bottom, #6C63FF, #00D4FF, #FF6584)',
+            }}
+          />
 
-              <CardContent className="flex flex-wrap gap-4 items-center">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Calendar className="h-4 w-4" />
-                  <span className="text-sm">{edu.period}</span>
+          {education.map((edu, index) => (
+            <div
+              key={index}
+              className={`relative flex items-start gap-8 mb-12 last:mb-0 transition-all duration-700 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              } ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
+              style={{ transitionDelay: `${300 + index * 200}ms` }}
+            >
+              {/* Timeline dot */}
+              <div
+                className="absolute left-6 lg:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-2 z-10"
+                style={{
+                  backgroundColor: '#050814',
+                  borderColor: edu.color,
+                  boxShadow: `0 0 15px ${edu.color}60`,
+                }}
+              />
+
+              {/* Content card */}
+              <div className={`ml-16 lg:ml-0 lg:w-[calc(50%-2rem)] glass glass-hover rounded-2xl p-6 group ${index % 2 === 0 ? 'lg:mr-auto' : 'lg:ml-auto'}`}>
+                <div className="flex items-start gap-4">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: `${edu.color}15` }}
+                  >
+                    <GraduationCap className="h-6 w-6" style={{ color: edu.color }} />
+                  </div>
+
+                  <div>
+                    <h3 className="font-display text-xl font-bold text-foreground mb-1">
+                      {edu.degree}
+                    </h3>
+                    <p className="text-sm font-medium mb-1" style={{ color: edu.color }}>
+                      {edu.field}
+                    </p>
+                    <p className="text-sm text-foreground/50 mb-1">{edu.institution}</p>
+                    <div className="flex items-center gap-1 text-xs text-foreground/30 mb-3">
+                      <MapPin className="h-3 w-3" />
+                      {edu.location}
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-1.5 text-foreground/40">
+                        <Calendar className="h-3.5 w-3.5" />
+                        <span className="font-mono text-xs">{edu.period}</span>
+                      </div>
+                      <span
+                        className="font-mono text-xs px-3 py-0.5 rounded-full"
+                        style={{
+                          backgroundColor: `${edu.color}15`,
+                          color: edu.color,
+                        }}
+                      >
+                        {edu.grade}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="px-4 py-1 bg-primary/10 rounded-full">
-                  <span className="text-sm font-medium text-primary">{edu.grade}</span>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>

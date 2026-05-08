@@ -1,76 +1,171 @@
-import { Button } from "@/components/ui/button";
-import { Download, Mail, ChevronDown, Code } from "lucide-react";
+import { useState, useEffect } from "react";
+import ParticleField from "@/components/ParticleField";
+import useTypewriter from "@/hooks/useTypewriter";
+import { Download, Mail, ChevronDown, Sparkles } from "lucide-react";
 
 const Hero = () => {
+  const [loaded, setLoaded] = useState(false);
+  const displayText = useTypewriter(
+    [
+      "Full Stack Developer",
+      "React & Node.js Engineer",
+      "Flutter Developer",
+      "AI Solutions Builder",
+      "Problem Solver",
+    ],
+    80,
+    50,
+    2000
+  );
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section 
-      id="home" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ background: "#050814" }}
     >
-      {/* Animated background */}
-      <div className="absolute inset-0 bg-gradient-bg opacity-50" />
-      
-      {/* Decorative code symbols */}
-      <div className="absolute inset-0 overflow-hidden opacity-10">
-        <div className="absolute top-20 left-10 text-6xl text-primary font-mono">&lt;/&gt;</div>
-        <div className="absolute bottom-40 right-20 text-4xl text-accent font-mono">{ }</div>
-        <div className="absolute top-1/2 left-1/4 text-5xl text-primary font-mono">[ ]</div>
+      {/* Aurora background gradient */}
+      <div
+        className="absolute inset-0 animate-aurora opacity-40"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(108,99,255,0.15) 0%, rgba(0,212,255,0.08) 25%, rgba(255,101,132,0.06) 50%, rgba(108,99,255,0.12) 75%, rgba(0,212,255,0.1) 100%)",
+          backgroundSize: "400% 400%",
+        }}
+      />
+
+      {/* Radial glow behind hero text */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-20"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(108,99,255,0.3) 0%, rgba(0,212,255,0.1) 40%, transparent 70%)",
+        }}
+      />
+
+      {/* Particle field */}
+      <ParticleField />
+
+      {/* Floating code symbols */}
+      <div className="floating-symbol text-7xl top-[15%] left-[8%] text-electric-purple animate-float" style={{ animationDelay: "0s" }}>
+        &lt;/&gt;
+      </div>
+      <div className="floating-symbol text-5xl bottom-[25%] right-[12%] text-cyan-accent animate-float-delayed" style={{ animationDelay: "2s" }}>
+        {"{ }"}
+      </div>
+      <div className="floating-symbol text-6xl top-[60%] left-[15%] text-rose-accent animate-float-slow" style={{ animationDelay: "4s" }}>
+        [ ]
+      </div>
+      <div className="floating-symbol text-4xl top-[20%] right-[20%] text-electric-purple/50 animate-float" style={{ animationDelay: "1s" }}>
+        =&gt;
+      </div>
+      <div className="floating-symbol text-5xl bottom-[35%] left-[60%] text-cyan-accent/50 animate-float-delayed" style={{ animationDelay: "3s" }}>
+        //
       </div>
 
-      {/* Code icon in circle */}
-      <div className="absolute top-32 left-1/2 -translate-x-1/2 animate-fade-in">
-        <div className="w-24 h-24 rounded-full border-2 border-primary flex items-center justify-center backdrop-blur-sm bg-card/30">
-          <Code className="h-10 w-10 text-primary" />
-        </div>
-      </div>
-      
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20">
-        <div className="animate-fade-in-up">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-4 leading-tight tracking-wider">
-            RAVURI LAJWANTH V N P
+      {/* Main content */}
+      <div className="relative z-10 container mx-auto px-6 lg:px-8 text-center">
+        <div
+          className={`transition-all duration-1000 ease-out ${
+            loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          {/* Status badge */}
+          <div className="inline-flex items-center gap-2 glass rounded-full px-5 py-2 mb-8">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            <span className="text-sm font-mono text-green-400/90 tracking-wider">
+              AVAILABLE FOR OPPORTUNITIES
+            </span>
+          </div>
+
+          {/* Name */}
+          <h1 className="font-display text-5xl sm:text-6xl lg:text-8xl font-bold mb-4 tracking-tight leading-none">
+            <span className="gradient-text">RAVURI LAJWANTH</span>
+            <br />
+            <span className="text-foreground/90 text-3xl sm:text-4xl lg:text-5xl font-light tracking-widest mt-2 block">
+              V N P
+            </span>
           </h1>
-          
-          <p className="text-2xl sm:text-3xl text-primary mb-6 font-light tracking-wide">
-            Aspiring Full Stack Developer
-          </p>
 
-          <p className="text-lg sm:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-            Java • Python • Flutter • React | Building innovative web & mobile applications with a strong foundation in DSA
-          </p>
+          {/* Typewriter role */}
+          <div className="h-12 flex items-center justify-center mb-6">
+            <span className="font-display text-xl sm:text-2xl lg:text-3xl text-cyan-accent/90 font-light tracking-wide">
+              {displayText}
+              <span className="typewriter-cursor" />
+            </span>
+          </div>
 
+          {/* Tech pills */}
+          <div className="flex flex-wrap gap-3 justify-center mb-10 max-w-2xl mx-auto">
+            {[
+              { name: "Java", color: "#FF6584" },
+              { name: "Python", color: "#00D4FF" },
+              { name: "C", color: "#6C63FF" },
+              { name: "Flutter", color: "#00D4FF" },
+              { name: "React", color: "#00D4FF" },
+              { name: "Node.js", color: "#6C63FF" },
+              { name: "MongoDB", color: "#FF6584" },
+              { name: "MySQL", color: "#00D4FF" },
+            ].map((tech, i) => (
+              <div
+                key={tech.name}
+                className="glass rounded-full px-4 py-1.5 flex items-center gap-2 hover:bg-white/[0.08] transition-all duration-300 cursor-default group"
+                style={{
+                  animationDelay: `${i * 100}ms`,
+                  borderColor: `${tech.color}30`,
+                }}
+              >
+                <div
+                  className="w-1.5 h-1.5 rounded-full animate-pulse"
+                  style={{ backgroundColor: tech.color, boxShadow: `0 0 8px ${tech.color}80` }}
+                />
+                <span className="font-mono text-xs text-foreground/80 group-hover:text-foreground transition-colors">
+                  {tech.name}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4 justify-center">
-          <Button 
-              size="lg" 
-              asChild
-              className="bg-gradient-button hover:opacity-90 shadow-glow text-white border-0 px-8 group"
+            <a
+              href="/resume.pdf"
+              download="Ravuri_Lajwanth_Resume.pdf"
+              className="btn-glow inline-flex items-center gap-2 px-8 py-3.5 rounded-xl text-white font-semibold text-base group"
             >
-              <a href="/resume.pdf" download="Ravuri_Lajwanth_Resume.pdf">
-                <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-                Download Resume
-              </a>
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              onClick={() => scrollToSection('contact')}
-              className="border-primary/50 text-foreground hover:bg-primary/10 backdrop-blur-sm px-8"
+              <Download className="h-5 w-5 group-hover:animate-bounce" />
+              Download Resume
+              <Sparkles className="h-4 w-4 opacity-60" />
+            </a>
+
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="btn-glass inline-flex items-center gap-2 px-8 py-3.5 rounded-xl text-foreground font-semibold text-base"
             >
-              <Mail className="mr-2 h-5 w-5" />
+              <Mail className="h-5 w-5" />
               Get In Touch
-            </Button>
+            </button>
           </div>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <ChevronDown className="h-8 w-8 text-primary" />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
+        <span className="text-xs font-mono text-muted-foreground/60 tracking-widest">SCROLL</span>
+        <ChevronDown className="h-5 w-5 text-electric-purple/60" />
       </div>
+
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050814] to-transparent" />
     </section>
   );
 };

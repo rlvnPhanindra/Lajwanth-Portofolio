@@ -1,12 +1,15 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { useState, useRef } from "react";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
-import { Mail, Linkedin, Github, Send } from "lucide-react";
+import { Mail, Linkedin, Github, Phone, Send, MessageCircle, Sparkles } from "lucide-react";
 import { z } from "zod";
+import emailjs from "@emailjs/browser";
+import useScrollReveal from "@/hooks/useScrollReveal";
+
+// EmailJS credentials
+const EMAILJS_SERVICE_ID = "service_acqbjk8";
+const EMAILJS_TEMPLATE_ID = "template_bniofy4";
+const EMAILJS_PUBLIC_KEY = "tSKdA_0BXBMjpeh7m";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -15,49 +18,76 @@ const contactSchema = z.object({
 });
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
-  });
+  const { ref: sectionRef, isVisible } = useScrollReveal(0.1);
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const contactInfo = [
     {
-      icon: <Mail className="h-6 w-6 text-primary" />,
+      icon: <Mail className="h-5 w-5" />,
       label: "Email",
-      value: "crazykrishna139@gmail.com",
-      link: "mailto:crazykrishna139@gmail.com"
+      value: "ravurilvnphanindra2005@gmail.com",
+      link: "mailto:ravurilvnphanindra2005@gmail.com",
+      color: "#6C63FF",
     },
     {
-      icon: <Linkedin className="h-6 w-6 text-primary" />,
-      label: "LinkedIn",
-      value: "Lajwanth V N P Ravuri",
-      link: "https://www.linkedin.com/in/lajwanth-v-n-p-ravuri"
-    },
-    {
-      icon: <Github className="h-6 w-6 text-primary" />,
+      icon: <Phone className="h-5 w-5" />,
       label: "Phone",
       value: "+91 93927 50400",
-      link: "tel:+919392750400"
-    }
+      link: "tel:+919392750400",
+      color: "#00D4FF",
+    },
+    {
+      icon: <Linkedin className="h-5 w-5" />,
+      label: "LinkedIn",
+      value: "Lajwanth V N P Ravuri",
+      link: "https://www.linkedin.com/in/lajwanth-v-n-p-ravuri",
+      color: "#0A66C2",
+    },
+    {
+      icon: <Github className="h-5 w-5" />,
+      label: "GitHub",
+      value: "rlvnPhanindra",
+      link: "https://github.com/rlvnPhanindra",
+      color: "#8B5CF6",
+    },
+    {
+      icon: <MessageCircle className="h-5 w-5" />,
+      label: "WhatsApp",
+      value: "+91 93927 50400",
+      link: "https://wa.me/919392750400",
+      color: "#25D366",
+    },
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       const validatedData = contactSchema.parse(formData);
       setIsSubmitting(true);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+
+      // Show confetti
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 3000);
+
       toast({
-        title: "Message sent!",
+        title: "Message sent! ✅",
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
-      
+
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -85,81 +115,108 @@ const Contact = () => {
     }));
   };
 
+  const handleWhatsApp = () => {
+    const name = formData.name || "someone";
+    const message = formData.message || "";
+    const text = encodeURIComponent(`Hi, I am ${name}. ${message}`);
+    window.open(`https://wa.me/919392750400?text=${text}`, '_blank');
+  };
+
   return (
-    <section id="contact" className="py-20 lg:py-32 bg-background relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-bg opacity-30" />
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
-              Contact
-            </h2>
-          </div>
+    <section id="contact" className="section-padding relative overflow-hidden" style={{ background: "#050814" }}>
+      {/* Background aurora */}
+      <div
+        className="absolute inset-0 opacity-20 animate-aurora"
+        style={{
+          background: "linear-gradient(135deg, rgba(108,99,255,0.2) 0%, rgba(0,212,255,0.1) 50%, rgba(255,101,132,0.1) 100%)",
+          backgroundSize: "400% 400%",
+        }}
+      />
+
+      {/* Confetti effect */}
+      {showConfetti && (
+        <div className="absolute inset-0 z-50 pointer-events-none overflow-hidden">
+          {Array.from({ length: 50 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 rounded-full"
+              style={{
+                backgroundColor: ['#6C63FF', '#00D4FF', '#FF6584', '#FFD700', '#8B5CF6'][i % 5],
+                left: `${Math.random() * 100}%`,
+                top: '-10px',
+                animation: `confetti-fall ${1.5 + Math.random() * 2}s ease-in forwards`,
+                animationDelay: `${Math.random() * 0.5}s`,
+              }}
+            />
+          ))}
+          <style>{`
+            @keyframes confetti-fall {
+              0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+              100% { transform: translateY(100vh) rotate(${Math.random() * 720}deg); opacity: 0; }
+            }
+          `}</style>
+        </div>
+      )}
+
+      <div ref={sectionRef} className="container mx-auto px-6 lg:px-8 relative z-10">
+        {/* Section header */}
+        <div className={`max-w-3xl mx-auto text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="font-mono text-xs text-cyan-accent tracking-[0.3em] uppercase mb-4 block">
+            // LET'S CONNECT
+          </span>
+          <h2 className="font-display text-4xl lg:text-5xl font-bold mb-6">
+            <span className="gradient-text">Get In Touch</span>
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <div className="lg:col-span-1 space-y-4">
-            <h3 className="text-2xl font-semibold text-foreground mb-6">
-              Contact Information
-            </h3>
-            
+          {/* Contact cards */}
+          <div className={`lg:col-span-1 space-y-3 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {contactInfo.map((info, index) => (
-              <Card 
+              <a
                 key={index}
-                className="bg-gradient-card shadow-card border-border/50 hover:shadow-glow transition-all duration-300 animate-scale-in"
-                style={{ animationDelay: `${index * 100}ms` }}
+                href={info.link}
+                target={info.link.startsWith('http') ? '_blank' : undefined}
+                rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="flex items-center gap-4 glass glass-hover rounded-xl p-4 group cursor-pointer transition-all duration-300"
+                style={{ transitionDelay: `${index * 80}ms` }}
               >
-                <CardContent className="pt-6">
-                  <a 
-                    href={info.link}
-                    target={info.link.startsWith('http') ? '_blank' : undefined}
-                    rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="flex items-center gap-4 group"
-                  >
-                    <div className="p-3 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-colors">
-                      {info.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-card-foreground mb-1">{info.label}</h4>
-                      <p className="text-sm text-primary">{info.value}</p>
-                    </div>
-                  </a>
-                </CardContent>
-              </Card>
+                <div
+                  className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundColor: `${info.color}15`, color: info.color }}
+                >
+                  {info.icon}
+                </div>
+                <div className="min-w-0">
+                  <p className="font-mono text-xs text-foreground/40 uppercase tracking-wider">{info.label}</p>
+                  <p className="text-sm text-foreground/80 truncate group-hover:text-foreground transition-colors">{info.value}</p>
+                </div>
+              </a>
             ))}
           </div>
 
-          {/* Contact Form */}
-          <Card className="lg:col-span-2 bg-gradient-card shadow-card border-border/50 animate-scale-in" style={{ animationDelay: "300ms" }}>
-            <CardHeader>
-              <CardTitle className="text-2xl text-foreground">Send a Message</CardTitle>
-              <CardDescription className="text-muted-foreground">
-                Fill out the form below and I'll get back to you as soon as possible
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Contact form */}
+          <div className={`lg:col-span-2 glass rounded-2xl p-8 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <h3 className="font-display text-xl font-semibold text-foreground mb-1">Send a Message</h3>
+            <p className="text-sm text-foreground/40 mb-6">Fill out the form and I'll get back to you shortly</p>
+
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-foreground">Name</Label>
-                  <Input
-                    id="name"
+                  <label className="text-sm font-medium text-foreground/70">Name</label>
+                  <input
                     name="name"
                     placeholder="Your name"
                     value={formData.name}
                     onChange={handleChange}
                     required
                     maxLength={100}
-                    className="bg-input border-border focus:border-primary transition-colors text-foreground"
+                    className="w-full px-4 py-3 rounded-xl bg-[#0A0E1A] border border-white/10 text-foreground placeholder:text-foreground/20 focus:border-electric-purple focus:ring-1 focus:ring-electric-purple/50 transition-all duration-300 outline-none text-sm"
                   />
                 </div>
-
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-foreground">Email</Label>
-                  <Input
-                    id="email"
+                  <label className="text-sm font-medium text-foreground/70">Email</label>
+                  <input
                     name="email"
                     type="email"
                     placeholder="your.email@example.com"
@@ -167,43 +224,56 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     maxLength={255}
-                    className="bg-input border-border focus:border-primary transition-colors text-foreground"
+                    className="w-full px-4 py-3 rounded-xl bg-[#0A0E1A] border border-white/10 text-foreground placeholder:text-foreground/20 focus:border-electric-purple focus:ring-1 focus:ring-electric-purple/50 transition-all duration-300 outline-none text-sm"
                   />
                 </div>
+              </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="message" className="text-foreground">Message</Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    placeholder="Tell me about your project..."
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    minLength={10}
-                    maxLength={1000}
-                    rows={6}
-                    className="bg-input border-border focus:border-primary transition-colors resize-none text-foreground"
-                  />
-                </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground/70">Message</label>
+                <textarea
+                  name="message"
+                  placeholder="Tell me about your project or opportunity..."
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  minLength={10}
+                  maxLength={1000}
+                  rows={5}
+                  className="w-full px-4 py-3 rounded-xl bg-[#0A0E1A] border border-white/10 text-foreground placeholder:text-foreground/20 focus:border-electric-purple focus:ring-1 focus:ring-electric-purple/50 transition-all duration-300 outline-none resize-none text-sm"
+                />
+              </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full bg-gradient-button hover:opacity-90 shadow-glow text-white border-0"
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  type="submit"
                   disabled={isSubmitting}
+                  className="flex-1 btn-glow inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
-                    "Sending..."
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   ) : (
                     <>
-                      <Send className="mr-2 h-4 w-4" />
-                      Send Message
+                      <Send className="h-4 w-4" />
+                      Send via Email
                     </>
                   )}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleWhatsApp}
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white transition-all duration-300 hover:-translate-y-0.5"
+                  style={{
+                    background: 'linear-gradient(135deg, #25D366, #128C7E)',
+                    boxShadow: '0 0 20px rgba(37, 211, 102, 0.3)',
+                  }}
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Send via WhatsApp
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </section>
