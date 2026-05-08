@@ -48,7 +48,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
 
     const arms = 4;
     const ratio = 3;
-    const speed = 8 * 0.003; // Doubled from 4 to 8 for faster animation
+    const speed = 64 * 0.003; // Doubled from 4 to 8 for faster animation
     const maxTrail = 700;
     const colors = THEMES.neon;
 
