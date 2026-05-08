@@ -85,7 +85,7 @@ const Achievements = () => {
   ];
 
   return (
-    <section id="achievements" className="section-padding relative overflow-hidden" style={{ background: "#050814" }}>
+    <section id="achievements" className="section-padding relative overflow-hidden" style={{ background: "var(--bg-deep)" }}>
       <div className="absolute inset-0 bg-gradient-bg opacity-30" />
 
       <div ref={sectionRef} className="container mx-auto px-6 lg:px-8 relative z-10">

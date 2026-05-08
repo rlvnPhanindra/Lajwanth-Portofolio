@@ -25,7 +25,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
       className={`fixed inset-0 z-[100] flex items-center justify-center transition-all duration-600 ${
         isExiting ? "opacity-0 scale-110" : "opacity-100 scale-100"
       }`}
-      style={{ background: "#050814" }}
+      style={{ background: "var(--bg-deep)" }}
     >
       {/* Aurora bg */}
       <div

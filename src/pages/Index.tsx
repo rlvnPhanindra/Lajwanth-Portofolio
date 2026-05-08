@@ -24,7 +24,7 @@ const Index = () => {
         className={`min-h-screen transition-opacity duration-500 ${
           isLoading ? "opacity-0" : "opacity-100"
         }`}
-        style={{ background: "#050814" }}
+        style={{ background: "var(--bg-deep)" }}
       >
         <Navigation />
         <main>

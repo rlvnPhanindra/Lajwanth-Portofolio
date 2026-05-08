@@ -123,7 +123,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section-padding relative overflow-hidden" style={{ background: "#050814" }}>
+    <section id="contact" className="section-padding relative overflow-hidden" style={{ background: "var(--bg-deep)" }}>
       {/* Background aurora */}
       <div
         className="absolute inset-0 opacity-20 animate-aurora"
@@ -211,7 +211,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     maxLength={100}
-                    className="w-full px-4 py-3 rounded-xl bg-[#0A0E1A] border border-white/10 text-foreground placeholder:text-foreground/20 focus:border-electric-purple focus:ring-1 focus:ring-electric-purple/50 transition-all duration-300 outline-none text-sm"
+                    className="w-full px-4 py-3 rounded-xl bg-[var(--input-bg)] border border-[var(--input-border)] text-foreground placeholder:text-foreground/20 focus:border-electric-purple focus:ring-1 focus:ring-electric-purple/50 transition-all duration-300 outline-none text-sm"
                   />
                 </div>
                 <div className="space-y-2">
@@ -224,7 +224,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     maxLength={255}
-                    className="w-full px-4 py-3 rounded-xl bg-[#0A0E1A] border border-white/10 text-foreground placeholder:text-foreground/20 focus:border-electric-purple focus:ring-1 focus:ring-electric-purple/50 transition-all duration-300 outline-none text-sm"
+                    className="w-full px-4 py-3 rounded-xl bg-[var(--input-bg)] border border-[var(--input-border)] text-foreground placeholder:text-foreground/20 focus:border-electric-purple focus:ring-1 focus:ring-electric-purple/50 transition-all duration-300 outline-none text-sm"
                   />
                 </div>
               </div>
@@ -240,7 +240,7 @@ const Contact = () => {
                   minLength={10}
                   maxLength={1000}
                   rows={5}
-                  className="w-full px-4 py-3 rounded-xl bg-[#0A0E1A] border border-white/10 text-foreground placeholder:text-foreground/20 focus:border-electric-purple focus:ring-1 focus:ring-electric-purple/50 transition-all duration-300 outline-none resize-none text-sm"
+                  className="w-full px-4 py-3 rounded-xl bg-[var(--input-bg)] border border-[var(--input-border)] text-foreground placeholder:text-foreground/20 focus:border-electric-purple focus:ring-1 focus:ring-electric-purple/50 transition-all duration-300 outline-none resize-none text-sm"
                 />
               </div>
 

@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import ParticleField from "@/components/ParticleField";
 import useTypewriter from "@/hooks/useTypewriter";
 import { Download, Mail, ChevronDown, Sparkles } from "lucide-react";
+import { useTheme } from "@/hooks/useTheme";
 
 const Hero = () => {
   const [loaded, setLoaded] = useState(false);
+  const { isDark } = useTheme();
   const displayText = useTypewriter(
     [
       "Full Stack Developer",
@@ -31,24 +33,28 @@ const Hero = () => {
     <section
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: "#050814" }}
+      style={{ background: "var(--bg-deep)" }}
     >
       {/* Aurora background gradient */}
       <div
-        className="absolute inset-0 animate-aurora opacity-40"
+        className="absolute inset-0 animate-aurora"
         style={{
-          background:
-            "linear-gradient(135deg, rgba(108,99,255,0.15) 0%, rgba(0,212,255,0.08) 25%, rgba(255,101,132,0.06) 50%, rgba(108,99,255,0.12) 75%, rgba(0,212,255,0.1) 100%)",
+          opacity: isDark ? 0.4 : 0.25,
+          background: isDark
+            ? "linear-gradient(135deg, rgba(108,99,255,0.15) 0%, rgba(0,212,255,0.08) 25%, rgba(255,101,132,0.06) 50%, rgba(108,99,255,0.12) 75%, rgba(0,212,255,0.1) 100%)"
+            : "linear-gradient(135deg, rgba(108,99,255,0.12) 0%, rgba(0,212,255,0.06) 25%, rgba(255,101,132,0.04) 50%, rgba(108,99,255,0.08) 75%, rgba(0,212,255,0.06) 100%)",
           backgroundSize: "400% 400%",
         }}
       />
 
       {/* Radial glow behind hero text */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-20"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
         style={{
-          background:
-            "radial-gradient(circle, rgba(108,99,255,0.3) 0%, rgba(0,212,255,0.1) 40%, transparent 70%)",
+          opacity: isDark ? 0.2 : 0.12,
+          background: isDark
+            ? "radial-gradient(circle, rgba(108,99,255,0.3) 0%, rgba(0,212,255,0.1) 40%, transparent 70%)"
+            : "radial-gradient(circle, rgba(108,99,255,0.2) 0%, rgba(0,212,255,0.08) 40%, transparent 70%)",
         }}
       />
 
@@ -165,7 +171,10 @@ const Hero = () => {
       </div>
 
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050814] to-transparent" />
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32"
+        style={{ background: `linear-gradient(to top, var(--bg-deep), transparent)` }}
+      />
     </section>
   );
 };

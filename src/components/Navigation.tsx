@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/hooks/useTheme";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const { theme, toggleTheme, isDark } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -86,20 +88,50 @@ const Navigation = () => {
                     <span className="relative z-10">{link.label}</span>
                   </button>
                 ))}
+
+                {/* Theme toggle button */}
+                <button
+                  onClick={toggleTheme}
+                  className="theme-toggle glass ml-2"
+                  aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+                  title={`Switch to ${isDark ? "light" : "dark"} mode`}
+                >
+                  {isDark ? (
+                    <Sun className="h-5 w-5 text-yellow-400" />
+                  ) : (
+                    <Moon className="h-5 w-5 text-electric-purple" />
+                  )}
+                </button>
               </div>
 
-              {/* Mobile toggle */}
-              <button
-                className="md:hidden p-2 rounded-xl glass"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label="Toggle menu"
-              >
-                {isMobileMenuOpen ? (
-                  <X className="h-5 w-5 text-foreground" />
-                ) : (
-                  <Menu className="h-5 w-5 text-foreground" />
-                )}
-              </button>
+              {/* Mobile right side: toggle + hamburger */}
+              <div className="flex md:hidden items-center gap-2">
+                {/* Theme toggle (mobile) */}
+                <button
+                  onClick={toggleTheme}
+                  className="theme-toggle glass"
+                  aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+                >
+                  {isDark ? (
+                    <Sun className="h-4 w-4 text-yellow-400" />
+                  ) : (
+                    <Moon className="h-4 w-4 text-electric-purple" />
+                  )}
+                </button>
+
+                {/* Mobile hamburger */}
+                <button
+                  className="p-2 rounded-xl glass"
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  aria-label="Toggle menu"
+                >
+                  {isMobileMenuOpen ? (
+                    <X className="h-5 w-5 text-foreground" />
+                  ) : (
+                    <Menu className="h-5 w-5 text-foreground" />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
 

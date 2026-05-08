@@ -47,7 +47,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="section-padding relative overflow-hidden" style={{ background: "#050814" }}>
+    <section id="about" className="section-padding relative overflow-hidden" style={{ background: "var(--bg-deep)" }}>
       {/* Subtle gradient bg */}
       <div className="absolute inset-0 bg-gradient-bg opacity-50" />
 
@@ -82,7 +82,10 @@ const About = () => {
                   className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
                 {/* Subtle overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050814]/60 via-transparent to-transparent" />
+                <div
+                  className="absolute inset-0"
+                  style={{ background: "linear-gradient(to top, rgba(var(--bg-deep-rgb), 0.6), transparent, transparent)" }}
+                />
               </div>
               {/* Bottom badges */}
               <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex gap-2">

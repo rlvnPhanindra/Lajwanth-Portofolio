@@ -8,7 +8,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative overflow-hidden" style={{ background: "#050814" }}>
+    <footer className="relative overflow-hidden" style={{ background: "var(--bg-deep)" }}>
       {/* Wave SVG divider */}
       <div className="relative -mt-1">
         <svg

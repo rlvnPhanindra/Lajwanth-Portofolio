@@ -35,7 +35,7 @@ const Education = () => {
   ];
 
   return (
-    <section id="education" className="section-padding relative overflow-hidden" style={{ background: "#050814" }}>
+    <section id="education" className="section-padding relative overflow-hidden" style={{ background: "var(--bg-deep)" }}>
       <div className="absolute inset-0 bg-gradient-bg opacity-20" style={{ transform: "rotate(180deg)" }} />
 
       <div ref={sectionRef} className="container mx-auto px-6 lg:px-8 relative z-10">
@@ -73,7 +73,7 @@ const Education = () => {
               <div
                 className="absolute left-6 lg:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-2 z-10"
                 style={{
-                  backgroundColor: '#050814',
+                  backgroundColor: 'var(--bg-deep)',
                   borderColor: edu.color,
                   boxShadow: `0 0 15px ${edu.color}60`,
                 }}
