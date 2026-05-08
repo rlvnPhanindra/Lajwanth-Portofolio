@@ -138,7 +138,7 @@ const Hero = () => {
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4 justify-center">
             <a
-              href={`${import.meta.env.BASE_URL}resume.pdf`}
+              href="/resume.pdf"
               download="Ravuri_Lajwanth_Resume.pdf"
               className="btn-glow inline-flex items-center gap-2 px-8 py-3.5 rounded-xl text-white font-semibold text-base group"
             >

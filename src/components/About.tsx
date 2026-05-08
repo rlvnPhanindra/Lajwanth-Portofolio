@@ -110,7 +110,7 @@ const About = () => {
                 foundation in Data Structures, Algorithms, and AI-powered solutions.
               </p>
               <a
-                href={`${import.meta.env.BASE_URL}resume.pdf`}
+                href="/resume.pdf"
                 download="Ravuri_Lajwanth_Resume.pdf"
                 className="btn-glow inline-flex items-center gap-2 px-7 py-3 rounded-xl text-white font-semibold text-sm"
               >
