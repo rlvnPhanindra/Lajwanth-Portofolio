@@ -60,7 +60,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className={`group relative glass rounded-2xl overflow-hidden transition-all duration-700 hover:-translate-y-3 ${
+              className={`group relative glass rounded-2xl overflow-hidden cursor-pointer transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_8px_30px_rgba(255,255,255,0.1)] hover:border-white/30 active:scale-95 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${200 + index * 150}ms` }}

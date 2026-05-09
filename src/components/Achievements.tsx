@@ -104,7 +104,7 @@ const Achievements = () => {
           {achievements.map((achievement, index) => (
             <div
               key={index}
-              className={`group glass glass-hover rounded-2xl p-6 cursor-default transition-all duration-700 hover:-translate-y-2 ${
+              className={`group glass glass-hover rounded-2xl p-6 cursor-pointer transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(255,255,255,0.1)] hover:border-white/30 active:scale-95 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${200 + index * 80}ms` }}
