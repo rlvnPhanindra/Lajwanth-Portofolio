@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
-import { Mail, Linkedin, Github, Phone, Send, MessageCircle, Sparkles } from "lucide-react";
+import { Mail, Linkedin, Github, Phone, Send, MessageCircle, Sparkles, Instagram } from "lucide-react";
 import { z } from "zod";
 import emailjs from "@emailjs/browser";
 import useScrollReveal from "@/hooks/useScrollReveal";
@@ -58,6 +58,13 @@ const Contact = () => {
       value: "+91 93927 50400",
       link: "https://wa.me/919392750400",
       color: "#25D366",
+    },
+    {
+      icon: <Instagram className="h-5 w-5" />,
+      label: "Instagram",
+      value: "@_its_me_urstyl_phani_",
+      link: "https://www.instagram.com/_its_me_urstyl_phani_/",
+      color: "#E1306C",
     },
   ];
 
@@ -179,7 +186,7 @@ const Contact = () => {
                 target={info.link.startsWith('http') ? '_blank' : undefined}
                 rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                 className="flex items-center gap-4 glass glass-hover rounded-xl p-4 group cursor-pointer transition-all duration-300"
-                style={{ transitionDelay: `${index * 80}ms` }}
+
               >
                 <div
                   className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:scale-110"

@@ -11,23 +11,33 @@ const Navigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-
-      // Detect active section
-      const sections = ["home", "about", "projects", "achievements", "education", "contact"];
-      for (const section of sections.reverse()) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 200) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Use IntersectionObserver instead of getBoundingClientRect for performance
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the entry that is currently intersecting
+        const visibleEntries = entries.filter(entry => entry.isIntersecting);
+        if (visibleEntries.length > 0) {
+          // If multiple, take the first one (highest on screen)
+          setActiveSection(visibleEntries[0].target.id);
+        }
+      },
+      { rootMargin: "-10% 0px -40% 0px", threshold: 0 }
+    );
+
+    const sections = ["home", "about", "projects", "achievements", "education", "contact"];
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -63,19 +73,27 @@ const Navigation = () => {
           <div className="px-6 py-3">
             <div className="flex items-center justify-between">
               {/* Logo */}
-              <button
-                onClick={() => scrollToSection("home")}
+              <a
+                href="#home"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection("home");
+                }}
                 className="font-display text-lg font-bold gradient-text hover:opacity-80 transition-opacity"
               >
                 RLVNP
-              </button>
+              </a>
 
               {/* Desktop nav */}
               <div className="hidden md:flex items-center gap-1">
                 {navLinks.map((link) => (
-                  <button
+                  <a
                     key={link.id}
-                    onClick={() => scrollToSection(link.id)}
+                    href={`#${link.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(link.id);
+                    }}
                     className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
                       activeSection === link.id
                         ? "text-white"
@@ -86,7 +104,7 @@ const Navigation = () => {
                       <div className="absolute inset-0 bg-electric-purple/20 rounded-xl border border-electric-purple/30" />
                     )}
                     <span className="relative z-10">{link.label}</span>
-                  </button>
+                  </a>
                 ))}
 
                 {/* Theme toggle button */}
@@ -140,9 +158,13 @@ const Navigation = () => {
             <div className="md:hidden px-4 pb-4 border-t border-white/10">
               <div className="pt-3 space-y-1">
                 {navLinks.map((link) => (
-                  <button
+                  <a
                     key={link.id}
-                    onClick={() => scrollToSection(link.id)}
+                    href={`#${link.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(link.id);
+                    }}
                     className={`block w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                       activeSection === link.id
                         ? "bg-electric-purple/20 text-white border border-electric-purple/30"
@@ -150,7 +172,7 @@ const Navigation = () => {
                     }`}
                   >
                     {link.label}
-                  </button>
+                  </a>
                 ))}
               </div>
             </div>

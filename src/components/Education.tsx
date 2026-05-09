@@ -67,7 +67,7 @@ const Education = () => {
               className={`relative flex items-start gap-8 mb-12 last:mb-0 transition-all duration-700 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               } ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
-              style={{ transitionDelay: `${300 + index * 200}ms` }}
+
             >
               {/* Timeline dot */}
               <div

@@ -39,7 +39,7 @@ const resumePdfHeaders = (): Plugin => ({
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/Personal-Portofolio/",
+  base: "/Lajwanth-Portofolio/",
   server: {
     host: "::",
     port: 8080,

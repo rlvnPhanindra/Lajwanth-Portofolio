@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import ParticleField from "@/components/ParticleField";
 import useTypewriter from "@/hooks/useTypewriter";
-import { Download, Mail, ChevronDown, Sparkles } from "lucide-react";
+import { Download, Mail, ChevronDown, Sparkles, Eye } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 
 const Hero = () => {
   const [loaded, setLoaded] = useState(false);
   const { isDark } = useTheme();
-  const displayText = useTypewriter(
+  const displayRole = useTypewriter(
     [
       "Full Stack Developer",
       "React & Node.js Engineer",
@@ -16,9 +16,11 @@ const Hero = () => {
       "Problem Solver",
     ],
     80,
-    50,
+    40,
     2000
   );
+
+  const displayName = useTypewriter(["RAVURI LAJWANTH"], 100, 50, 2000, false);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoaded(true), 100);
@@ -61,23 +63,6 @@ const Hero = () => {
       {/* Particle field */}
       <ParticleField />
 
-      {/* Floating code symbols */}
-      <div className="floating-symbol text-7xl top-[15%] left-[8%] text-electric-purple animate-float" style={{ animationDelay: "0s" }}>
-        &lt;/&gt;
-      </div>
-      <div className="floating-symbol text-5xl bottom-[25%] right-[12%] text-cyan-accent animate-float-delayed" style={{ animationDelay: "2s" }}>
-        {"{ }"}
-      </div>
-      <div className="floating-symbol text-6xl top-[60%] left-[15%] text-rose-accent animate-float-slow" style={{ animationDelay: "4s" }}>
-        [ ]
-      </div>
-      <div className="floating-symbol text-4xl top-[20%] right-[20%] text-electric-purple/50 animate-float" style={{ animationDelay: "1s" }}>
-        =&gt;
-      </div>
-      <div className="floating-symbol text-5xl bottom-[35%] left-[60%] text-cyan-accent/50 animate-float-delayed" style={{ animationDelay: "3s" }}>
-        //
-      </div>
-
       {/* Main content */}
       <div className="relative z-10 container mx-auto px-6 lg:px-8 text-center">
         <div
@@ -94,10 +79,11 @@ const Hero = () => {
           </div>
 
           {/* Name */}
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-8xl font-bold mb-4 tracking-tight leading-none">
-            <span className="gradient-text">RAVURI LAJWANTH</span>
+          <h1 className="font-display text-5xl sm:text-6xl lg:text-8xl font-bold mb-4 tracking-tight leading-none min-h-[1.2em]">
+            <span className="gradient-text">{displayName}</span>
+            <span className="typewriter-cursor ml-1" />
             <br />
-            <span className="text-foreground/90 text-3xl sm:text-4xl lg:text-5xl font-light tracking-widest mt-2 block">
+            <span className="text-foreground/80 text-xl sm:text-2xl font-medium tracking-wide mt-4 block">
               V N P
             </span>
           </h1>
@@ -105,8 +91,8 @@ const Hero = () => {
           {/* Typewriter role */}
           <div className="h-12 flex items-center justify-center mb-6">
             <span className="font-display text-xl sm:text-2xl lg:text-3xl text-cyan-accent/90 font-light tracking-wide">
-              {displayText}
-              <span className="typewriter-cursor" />
+              {displayRole}
+              <span className="typewriter-cursor ml-1" />
             </span>
           </div>
 
@@ -148,9 +134,19 @@ const Hero = () => {
               download="Ravuri_Lajwanth_Resume.pdf"
               className="btn-glow inline-flex items-center gap-2 px-8 py-3.5 rounded-xl text-white font-semibold text-base group"
             >
-              <Download className="h-5 w-5 group-hover:animate-bounce" />
+              <Download className="h-5 w-5 group-hover:-translate-y-1 transition-transform" />
               Download Resume
               <Sparkles className="h-4 w-4 opacity-60" />
+            </a>
+            
+            <a
+              href={`${import.meta.env.BASE_URL}resume.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-glass inline-flex items-center gap-2 px-8 py-3.5 rounded-xl text-foreground font-semibold text-base group"
+            >
+              <Eye className="h-5 w-5 group-hover:text-electric-purple transition-colors" />
+              View Resume
             </a>
 
             <button

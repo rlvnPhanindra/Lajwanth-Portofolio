@@ -110,12 +110,42 @@ const About = () => {
               <p className="text-cyan-accent font-medium mb-4 text-lg">
                 B.Tech IT — LBRCE (Autonomous), Mylavaram
               </p>
-              <p className="text-foreground/50 text-sm leading-relaxed mb-6 max-w-lg">
+              <p className="text-foreground/50 text-sm leading-relaxed mb-8 max-w-lg">
                 Aspiring Full Stack Developer with strong technical expertise in Java, C, and Python.
                 Experienced in frontend & mobile development using Flutter, React, and Node.js.
                 Passionate about building innovative web and mobile applications with a solid
                 foundation in Data Structures, Algorithms, and AI-powered solutions.
               </p>
+
+              {/* Stat Cards */}
+              <div className="grid grid-cols-3 gap-3 md:gap-4 mb-8">
+                <div className="glass rounded-xl p-4 md:py-5 flex flex-col items-center justify-center text-center border-white/5 hover:border-electric-purple/30 transition-all duration-300 group">
+                  <span className="text-2xl md:text-3xl font-display font-bold text-[#A594FD] group-hover:scale-110 transition-transform duration-300 mb-1">
+                    5+
+                  </span>
+                  <span className="text-[10px] md:text-xs font-medium text-foreground/50 tracking-wide">
+                    Projects
+                  </span>
+                </div>
+                
+                <div className="glass rounded-xl p-4 md:py-5 flex flex-col items-center justify-center text-center border-white/5 hover:border-[#A594FD]/30 transition-all duration-300 group">
+                  <span className="text-2xl md:text-3xl font-display font-bold text-[#A594FD] group-hover:scale-110 transition-transform duration-300 mb-1">
+                    20+
+                  </span>
+                  <span className="text-[10px] md:text-xs font-medium text-foreground/50 tracking-wide">
+                    Certifications
+                  </span>
+                </div>
+
+                <div className="glass rounded-xl p-4 md:py-5 flex flex-col items-center justify-center text-center border-white/5 hover:border-[#A594FD]/30 transition-all duration-300 group">
+                  <span className="text-2xl md:text-3xl font-display font-bold text-[#A594FD] group-hover:scale-110 transition-transform duration-300 mb-1">
+                    5+
+                  </span>
+                  <span className="text-[10px] md:text-xs font-medium text-foreground/50 tracking-wide">
+                    Technologies
+                  </span>
+                </div>
+              </div>
               <a
                 href={`${import.meta.env.BASE_URL}resume.pdf`}
                 download="Ravuri_Lajwanth_Resume.pdf"
@@ -133,10 +163,9 @@ const About = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className={`glass glass-hover rounded-2xl p-6 group cursor-pointer transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(255,255,255,0.1)] hover:border-white/30 active:scale-95 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: `${300 + index * 100}ms` }}
+              className={`glass glass-hover rounded-2xl p-6 group cursor-default transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+
             >
               <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform duration-300`}>
                 {feature.icon}
@@ -152,7 +181,38 @@ const About = () => {
         </div>
 
         {/* Skills */}
-        <div className="max-w-4xl mx-auto space-y-10">
+        <div className="max-w-4xl mx-auto space-y-12">
+          {/* Core Proficiencies (Progress Bars) */}
+          <div className={`transition-all duration-700 delay-[600ms] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <h3 className="font-display text-2xl font-semibold text-center mb-8">
+              <span className="gradient-text">Core Proficiencies</span>
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+              {[
+                { name: "Java & Python", level: 90, color: "from-electric-purple to-cyan-accent" },
+                { name: "React & Node.js", level: 85, color: "from-cyan-accent to-electric-purple" },
+                { name: "Flutter", level: 80, color: "from-rose-accent to-electric-purple" },
+                { name: "SQL & MongoDB", level: 85, color: "from-electric-purple to-rose-accent" },
+              ].map((skill, idx) => (
+                <div key={idx} className="glass p-5 rounded-xl transition-transform hover:-translate-y-1 duration-300">
+                  <div className="flex justify-between mb-3">
+                    <span className="font-medium text-foreground">{skill.name}</span>
+                    <span className="text-foreground/60 text-sm font-mono">{skill.level}%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden backdrop-blur-sm">
+                    <div 
+                      className={`h-full bg-gradient-to-r ${skill.color} rounded-full transition-all duration-1000 ease-out`} 
+                      style={{ 
+                        width: isVisible ? `${skill.level}%` : '0%',
+                        boxShadow: '0 0 10px rgba(255,255,255,0.2)' 
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className={`transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <h3 className="font-display text-2xl font-semibold text-center mb-8">
               <span className="gradient-text">Technical Skills</span>

@@ -59,8 +59,8 @@
     --border-glass: rgba(255, 255, 255, 0.10);
     --border-glass-hover: rgba(255, 255, 255, 0.25);
     --text-primary: #FFFFFF;
-    --text-secondary: rgba(255, 255, 255, 0.6);
-    --text-muted: rgba(255, 255, 255, 0.4);
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --text-muted: rgba(255, 255, 255, 0.6);
     --input-bg: #0A0E1A;
     --input-border: rgba(255, 255, 255, 0.10);
     --scrollbar-track: #050814;
@@ -77,11 +77,11 @@
     --gradient-card: linear-gradient(135deg, rgba(108, 99, 255, 0.05) 0%, rgba(0, 212, 255, 0.03) 100%);
 
     /* === Shadows & Glows === */
-    --glow-purple: 0 0 40px rgba(108, 99, 255, 0.4);
-    --glow-cyan: 0 0 40px rgba(0, 212, 255, 0.3);
-    --glow-rose: 0 0 40px rgba(255, 101, 132, 0.3);
-    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
-    --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.5);
+    --glow-purple: 0 0 20px rgba(108, 99, 255, 0.2);
+    --glow-cyan: 0 0 20px rgba(0, 212, 255, 0.15);
+    --glow-rose: 0 0 20px rgba(255, 101, 132, 0.15);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.3);
   }
 
   /* ===== DARK MODE ===== */
@@ -113,8 +113,8 @@
     --border-glass: rgba(255, 255, 255, 0.10);
     --border-glass-hover: rgba(255, 255, 255, 0.25);
     --text-primary: #FFFFFF;
-    --text-secondary: rgba(255, 255, 255, 0.6);
-    --text-muted: rgba(255, 255, 255, 0.4);
+    --text-secondary: rgba(255, 255, 255, 0.8);
+    --text-muted: rgba(255, 255, 255, 0.6);
     --input-bg: #0A0E1A;
     --input-border: rgba(255, 255, 255, 0.10);
     --scrollbar-track: #050814;
@@ -122,8 +122,8 @@
     --scrollbar-thumb-hover: rgba(108, 99, 255, 0.7);
     --selection-bg: rgba(108, 99, 255, 0.4);
     --selection-color: white;
-    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
-    --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.5);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.3);
   }
 
   /* ===== LIGHT MODE ===== */
@@ -155,8 +155,8 @@
     --border-glass: rgba(108, 99, 255, 0.12);
     --border-glass-hover: rgba(108, 99, 255, 0.30);
     --text-primary: #1A1D2E;
-    --text-secondary: rgba(26, 29, 46, 0.65);
-    --text-muted: rgba(26, 29, 46, 0.4);
+    --text-secondary: rgba(26, 29, 46, 0.8);
+    --text-muted: rgba(26, 29, 46, 0.6);
     --input-bg: #FFFFFF;
     --input-border: rgba(108, 99, 255, 0.15);
     --scrollbar-track: #F8F9FC;
@@ -178,12 +178,7 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   
-  /* Hide default cursor on devices that use a mouse */
-  @media (hover: hover) and (pointer: fine) {
-    *, *::before, *::after {
-      cursor: none !important;
-    }
-  }
+
 
   html {
     scroll-behavior: smooth;
@@ -193,8 +188,11 @@
     @apply bg-background text-foreground;
     background-color: var(--bg-deep);
     font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
     transition: background-color 0.5s ease, color 0.5s ease;
+  }
+  
+  #root {
+    overflow-x: hidden;
   }
 
   ::selection {
