@@ -3,6 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { Code2, Database, Globe, Smartphone, Download, Briefcase, MapPin } from "lucide-react";
 import useScrollReveal from "@/hooks/useScrollReveal";
 import avatarImage from "@/assets/avatar.png";
+import robotAvatarImage from "@/assets/robot_avatar.png";
+import HoverMaskReveal from "@/components/HoverMaskReveal";
 
 const About = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal(0.1);
@@ -76,14 +78,16 @@ const About = () => {
               {/* Glow ring behind avatar */}
               <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-electric-purple via-cyan-accent to-electric-purple opacity-40 blur-md group-hover:opacity-60 transition-opacity duration-500" />
               <div className="relative w-52 h-64 lg:w-60 lg:h-72 rounded-2xl overflow-hidden border border-white/15 shadow-elevated">
-                <img
-                  src={avatarImage}
-                  alt="Ravuri Lajwanth V N P — Digital Avatar"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                <HoverMaskReveal
+                  frontSrc={avatarImage}
+                  backSrc={robotAvatarImage}
+                  frontAlt="Ravuri Lajwanth V N P — Digital Avatar"
+                  backAlt="Ravuri Lajwanth V N P — Robot Avatar"
+                  className="w-full h-full transition-transform duration-700 group-hover:scale-105"
                 />
                 {/* Subtle overlay gradient */}
                 <div
-                  className="absolute inset-0"
+                  className="absolute inset-0 pointer-events-none"
                   style={{ background: "linear-gradient(to top, rgba(var(--bg-deep-rgb), 0.6), transparent, transparent)" }}
                 />
               </div>
